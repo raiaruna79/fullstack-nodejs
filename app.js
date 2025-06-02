@@ -1,7 +1,7 @@
 let express = require("express")
 let app = express()  //let express = require("express")()
 
-require("./database/connection")
+const { books } = require("./database/connection")
 /*
 app.get("/",(req,res)=>{
     res.json({
@@ -23,17 +23,13 @@ app.post("/register",function(req,res){
 })
 }); */
 
-app.get("/books",function(req,res){
+app.get("/books",async function(req,res){
+    //logic to fetch book db
+    const datas = await books.findAll() //select * from boks,books.find
     res.json({
-        meaasge:"Books fetched succussfully"
+        meaasge:"Books fetched succussfully" 
 })
-});
-
-app.post("/books",function(req,res){
-    res.json({
-        meaasge:"Book added successfully"
 })
-});
 
 app.delete("/books/:id",function(req,res){
     res.json({
